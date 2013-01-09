@@ -1,13 +1,3 @@
-var data = [
-  {complaintIssue: "mortgages", percent: 50},
-  {complaintIssue: "credit cards", percent: 20},
-  {complaintIssue: "bank products and services", percent: 17},
-  {complaintIssue: "student loans", percent: 4},
-  {complaintIssue: "credit reporting", percent: 4},
-  {complaintIssue: "consumer loans", percent: 4},
-  {complaintIssue: "other", percent: 1}
-];
-
 var colors = ["#444", "#555", "#666", "#777", "#888", "#999", "#aaa"];
 
 var activeColor = "#50B948";
