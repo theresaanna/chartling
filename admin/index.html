@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="libs/ICanHaz.min.js"></script>
+<script src="form.js"></script>
+</head>
+<body>
+Which type of visualization would you like to make?
+
+<form id="layout-types"></form>
+
+<script id="linkList" type="text/html">
+    <ul>
+        {{>links}}
+    </ul>
+</script>
+
+<script id="links" type="text/html" class="partial">
+    <li><a href="#" id="{{linkId}}">{{linkText}}</a></li>
+</script>
+</body>
+</html>
