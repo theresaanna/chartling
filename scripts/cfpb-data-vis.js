@@ -26,7 +26,7 @@ DataVis.PieChart = function(chartData) {
       return pos;
     },
 
-    this.getLabelPositioning = function(d) {
+    this.getLabelPositioning = function(d, arc) {
       // c = x,y coord of what I assume is the center point of the arc
       // can't find much on the concept of a centroid for arcs
       var c = arc.centroid(d),
@@ -39,10 +39,12 @@ DataVis.PieChart = function(chartData) {
     },
 
     this.getColor = function(d, i) {
-      return colors[i];
+      return DataVis.colors.gradient[i];
     },
 
     this.render = function(chartData) {
+        var pieConstructor = this;
+
         var chart = d3.select(".tributary_svg")
             .append("svg:svg")
             .data([chartData])
@@ -70,7 +72,7 @@ DataVis.PieChart = function(chartData) {
 
         // slice
         arcs.append("svg:path")
-            .attr("fill", getColor)
+            .attr("fill", this.getColor)
             .attr("d", arc);
 
         arcs.on("mouseover", function(d) { 
@@ -80,10 +82,10 @@ DataVis.PieChart = function(chartData) {
               issueLabel = slice.select("text.issue"),
               defaultFill = path.attr("fill");
           path.attr("default-fill", defaultFill)
-               .attr("fill", activeColor);
+               .attr("fill", DataVis.colors.activeColor);
 
           percentLabel.attr("default-fill", defaultFill)
-               .attr("fill", activeColor)
+               .attr("fill", DataVis.colors.activeColor)
                 .style("font-size", "150%");
           slice.style("font-weight", "bold");
 
@@ -105,25 +107,25 @@ DataVis.PieChart = function(chartData) {
           // transform and translate are attributes of svg <text>
           .attr("transform", function(d) {
             d.innerRadius = 100;
-            var coords = getLabelPositioning(d);
+            var coords = pieConstructor.getLabelPositioning(d, arc);
             // x/hypotenuse * horiz label radius, y/hypotenuse * vert label radius
             return "translate(" + (coords[0] * 214) +  ',' +
                (coords[1]* 237) +  ")"; 
           })
-          .attr("text-anchor", calculateTextAnchor)
+          .attr("text-anchor", this.calculateTextAnchor)
           .attr("class", 'label percent')
-          .attr("fill", getColor)
-          .text(function(d, i) { return data[i].percent + "%"; });
+          .attr("fill", this.getColor)
+          .text(function(d, i) { return chartData[i].percent + "%"; });
 
         //issue text
         arcs.append("svg:text")
-            .attr("text-anchor", calculateTextAnchor)
+            .attr("text-anchor", this.calculateTextAnchor)
             .attr("class", "label issue")
             .attr("transform", function(d) {
-              var coords = getLabelPositioning(d);
+              var coords = pieConstructor.getLabelPositioning(d, arc);
               return "translate(" + (coords[0] * 264) + "," + (coords[1] * 257) + ")";
             })
-            .text(function(d, i) { return data[i].complaintIssue; });
+            .text(function(d, i) { return chartData[i].complaintIssue; });
     }
 };
 
@@ -133,5 +135,6 @@ $(document).ready(function() {
             // in the future we'll need to determine vis type
             pieChart = new DataVis.PieChart(cfpbData);
         console.log(pieChart);
+        pieChart.render(cfpbData);      
     }
 });
