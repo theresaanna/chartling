@@ -1,5 +1,10 @@
+/* 
+ * layout module
+ * only public method is 'render' which accepts parsed CFPBDATA JSON
+ */
+
 define(["./settings"], function(layoutSettings) {
-return function(chartData) {
+return function() {
     this.calculateTextAnchor = function(d) {
       // calculate whether we are past the 6pm point on the pie
       // so that we know where to anchor the text
