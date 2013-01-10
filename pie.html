@@ -5,6 +5,19 @@
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="tributary_svg"></svg>
+<script>
+var DATA = [
+  {complaintIssue: "mortgages", percent: 50},
+  {complaintIssue: "credit cards", percent: 20},
+  {complaintIssue: "bank products and services", percent: 17},
+  {complaintIssue: "student loans", percent: 4},
+  {complaintIssue: "credit reporting", percent: 4},
+  {complaintIssue: "consumer loans", percent: 4},
+  {complaintIssue: "other", percent: 1}
+];
+
+var CFPBDATA = JSON.stringify(DATA);
+</script>
 <script src="scripts/cfpb-data-vis.js"></script>
 </body>
 </html>
