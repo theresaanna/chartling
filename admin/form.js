@@ -17,7 +17,7 @@ $(document).ready(function() {
 
         // temp solution
         for (var i = 1; i <= 5; i++) {
-           form.options.push({num: i}); 
+           form.options.push({num: i, tooltipLinks: [{},{},{}]}); 
         }
 
         optionForm = ich[templateName](form);
