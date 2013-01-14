@@ -24,19 +24,20 @@ $(document).ready(function() {
         $("#visualization-form").append(optionForm);
     };
 
+    // gathers form input values and inserts JSON of values into textarea
     var generateJSON = function(event) {
         event.preventDefault();
         var submittedInfo = {},
             inputs,
-            fieldset,
+            fieldset = {},
             fieldsetName,
             output,
             fieldsets = $('fieldset');
 
+        // build objects of the fieldsets that have inputs with values
         fieldsets.each(function() {
+            fieldset = {}; //reset
             fieldsetName = $(this).attr('name');
-            submittedInfo[fieldsetName] = {};
-            fieldset = submittedInfo[fieldsetName];
 
             // yikes
             $(this).find("input:not([type='submit'])")
@@ -47,8 +48,15 @@ $(document).ready(function() {
                         fieldset[this.name] = val;
                     }
                 });
+
+            // if any of the inputs in this fieldset have values,
+            // we want to preserve them
+            if ($.isEmptyObject(fieldset) === false) {
+                submittedInfo[fieldsetName] = fieldset;
+            }
         });
 
+        // stringify and stick in the textarea
         output = JSON.stringify(submittedInfo);
         $('#json-output').val(output);
     };
