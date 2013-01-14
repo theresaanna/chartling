@@ -22,7 +22,35 @@ $(document).ready(function() {
 
         optionForm = ich[templateName](form);
         $("#visualization-form").append(optionForm);
-        
+    };
+
+    var generateJSON = function(event) {
+        event.preventDefault();
+        var submittedInfo = {},
+            inputs,
+            fieldset,
+            fieldsetName,
+            output,
+            fieldsets = $('fieldset');
+
+        fieldsets.each(function() {
+            fieldsetName = $(this).attr('name');
+            submittedInfo[fieldsetName] = {};
+            fieldset = submittedInfo[fieldsetName];
+
+            // yikes
+            $(this).find("input:not([type='submit'])")
+                .each(function() {
+                    var val = this.value;
+
+                    if (val !== "") {
+                        fieldset[this.name] = val;
+                    }
+                });
+        });
+
+        output = JSON.stringify(submittedInfo);
+        $('#json-output').val(output);
     };
     
     // render visualization options
@@ -31,5 +59,7 @@ $(document).ready(function() {
 
     // event bindings
     $(".option-link").on('click', openForm);
+
+    $("#visualization-form").on('submit', generateJSON);
 
 });
