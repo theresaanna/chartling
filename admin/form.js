@@ -27,7 +27,7 @@ $(document).ready(function() {
     // gathers form input values and inserts JSON of values into textarea
     var generateJSON = function(event) {
         event.preventDefault();
-        var submittedInfo = {},
+        var submittedInfo = [],
             inputs,
             fieldset = {},
             fieldsetName,
@@ -38,7 +38,7 @@ $(document).ready(function() {
         fieldsets.each(function() {
             fieldset = {}; //reset
             fieldsetName = $(this).attr('name');
-
+            
             $(this).find("input:not([type='submit'])")
                 .each(function() {
                     var val = this.value;
@@ -51,7 +51,8 @@ $(document).ready(function() {
             // if any of the inputs in this fieldset have values,
             // we want to preserve them
             if ($.isEmptyObject(fieldset) === false) {
-                submittedInfo[fieldsetName] = fieldset;
+                fieldset['section'] = fieldsetName;
+                submittedInfo.push(fieldset);
             }
         });
 

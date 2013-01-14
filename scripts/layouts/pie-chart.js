@@ -124,7 +124,7 @@ define(["./settings"], function(layoutSettings) {
                   var coords = pieConstructor.getLabelPositioning(d, arc);
                   return "translate(" + (coords[0] * 264) + "," + (coords[1] * 257) + ")";
                 })
-                .text(function(d, i) { return chartData[i].complaintIssue; });
+                .text(function(d, i) { return chartData[i].segmentName; });
         }
     };
 });

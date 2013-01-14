@@ -31,17 +31,15 @@
 </script>
 
 <script id="pieChartForm" type="text/html">
-    <fieldset name="pie-chart">
+    <fieldset name="main">
         <label>Chart Title</label>
         <input type="text" name="chartTitle"></input>
     </fieldset>
 
-    <fieldset name="pieChartOptions">
     <legend>Pie Slices</legend>
-        {{#options}}
-            {{> pieChartOptions}}
-        {{/options}}
-    </fieldset>
+    {{#options}}
+        {{> pieChartOptions}}
+    {{/options}}
 
     <input type="submit" id="options-submit" value="go" />
 </script>
