@@ -41,10 +41,11 @@ define(["./settings"], function(layoutSettings) {
           return layoutSettings.colorGradient[i];
         },
 
+        // todo: break this out
         this.render = function(chartData) {
             var pieConstructor = this;
 
-            var chart = d3.select(".cfpb-data-visualization")
+            var chart = d3.select(".cfpb-data-visualization-" + chartData.settings.timestamp)
                 .append("svg:svg")
                 .data([chartData.slices])
                     .attr("class", "pie")
