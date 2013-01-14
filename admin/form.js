@@ -39,7 +39,6 @@ $(document).ready(function() {
             fieldset = {}; //reset
             fieldsetName = $(this).attr('name');
 
-            // yikes
             $(this).find("input:not([type='submit'])")
                 .each(function() {
                     var val = this.value;
@@ -57,7 +56,10 @@ $(document).ready(function() {
         });
 
         // stringify and stick in the textarea
-        output = JSON.stringify(submittedInfo);
+        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization"></svg>';
+        output += '<script>var CFPBDATA = ';
+        output += JSON.stringify(submittedInfo);
+        output += '</script>';
         $('#json-output').val(output);
     };
     
