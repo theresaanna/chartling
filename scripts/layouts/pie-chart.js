@@ -44,7 +44,7 @@ define(["./settings"], function(layoutSettings) {
         this.render = function(chartData) {
             var pieConstructor = this;
 
-            var chart = d3.select(".tributary_svg")
+            var chart = d3.select(".cfpb-data-visualization")
                 .append("svg:svg")
                 .data([chartData])
                     .attr("class", "pie")
