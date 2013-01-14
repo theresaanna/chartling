@@ -27,7 +27,7 @@ $(document).ready(function() {
     // gathers form input values and inserts JSON of values into textarea
     var generateJSON = function(event) {
         event.preventDefault();
-        var submittedInfo = [],
+        var submittedInfo = {"slices": []},
             inputs,
             fieldset = {},
             fieldsetName,
@@ -51,16 +51,20 @@ $(document).ready(function() {
             // if any of the inputs in this fieldset have values,
             // we want to preserve them
             if ($.isEmptyObject(fieldset) === false) {
-                fieldset['section'] = fieldsetName;
-                submittedInfo.push(fieldset);
+                if (fieldsetName.substr(0, 5) === 'slice') {
+                    submittedInfo.slices.push(fieldset);
+                }
+                else {
+                    submittedInfo[fieldsetName] = fieldset;
+                }
             }
         });
 
         // stringify and stick in the textarea
-        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization"></svg>';
-        output += '<script>var CFPBDATA = ';
-        output += JSON.stringify(submittedInfo);
-        output += '</script>';
+        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization"></svg>\n';
+        output += "<script>var CFPBDATA = '";
+        output += [JSON.stringify(submittedInfo)];
+        output += "';</script>";
         $('#json-output').val(output);
     };
     

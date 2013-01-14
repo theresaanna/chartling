@@ -41,19 +41,16 @@ define(["./settings"], function(layoutSettings) {
           return layoutSettings.colorGradient[i];
         },
 
+        // TODO: break this up
         this.render = function(chartData) {
             var pieConstructor = this;
 
             var chart = d3.select(".cfpb-data-visualization")
                 .append("svg:svg")
-                .data([chartData])
+                .data([chartData.slices])
                     .attr("class", "pie")
                     .append("svg:g")
                     .attr("transform", "translate(450, 350)");
-
-            chart.append("svg:text")
-              .text("Breakdown of complaint issues reported by consumers between 1/4/12 and 12/27/12")
-              .attr("transform", "translate(-320, -320)");
 
             var arc = d3.svg.arc()
                 .outerRadius(200);
@@ -114,7 +111,7 @@ define(["./settings"], function(layoutSettings) {
               .attr("text-anchor", this.calculateTextAnchor)
               .attr("class", 'label percent')
               .attr("fill", this.getColor)
-              .text(function(d, i) { return chartData[i].percent + "%"; });
+              .text(function(d, i) { return chartData.slices[i].percent + "%"; });
 
             //issue text
             arcs.append("svg:text")
@@ -124,7 +121,7 @@ define(["./settings"], function(layoutSettings) {
                   var coords = pieConstructor.getLabelPositioning(d, arc);
                   return "translate(" + (coords[0] * 264) + "," + (coords[1] * 257) + ")";
                 })
-                .text(function(d, i) { return chartData[i].segmentName; });
+                .text(function(d, i) { return chartData.slices[i].segmentName; });
         }
     };
 });

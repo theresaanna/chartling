@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // if there is a visualization to render on this page, there'll be
     // an object with JSON stored in CFPBDATA
-    if (CFPBDATA) {
+    if (typeof CFPBDATA !== "undefined") {
         /*
          * kicks off visualization rendering if there's a JSON object
          * in the DOM. we also don't load the D3 library unless its in use on this page.
