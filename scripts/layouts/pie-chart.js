@@ -41,7 +41,6 @@ define(["./settings"], function(layoutSettings) {
           return layoutSettings.colorGradient[i];
         },
 
-        // TODO: break this up
         this.render = function(chartData) {
             var pieConstructor = this;
 

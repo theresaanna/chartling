@@ -31,9 +31,10 @@
 </script>
 
 <script id="pieChartForm" type="text/html">
-    <fieldset name="main">
+    <fieldset name="global" data-visualization="global">
         <label>Chart Title</label>
         <input type="text" name="chartTitle"></input>
+        <input type="hidden" value="{{timestamp}}" name="timestamp"></input>
     </fieldset>
 
     <legend>Pie Slices</legend>
@@ -45,7 +46,7 @@
 </script>
 
 <script id="pieChartOptions" type="text/html" class="partial">
-    <fieldset name="slice{{num}}">
+    <fieldset name="slice{{num}}" data-visualization="data">
         <legend>Slice {{num}}</legend>
 
         <label>Segment Name</label>

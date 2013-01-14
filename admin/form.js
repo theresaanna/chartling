@@ -14,7 +14,7 @@ $(document).ready(function() {
             form = {};
 
         form.options = [];
-
+        form.timestamp = Date.now().toString();
         // temp solution
         for (var i = 1; i <= 5; i++) {
            form.options.push({num: i, tooltipLinks: [{},{},{}]}); 
@@ -24,44 +24,53 @@ $(document).ready(function() {
         $("#visualization-form").append(optionForm);
     };
 
+    var parseInputs = function(fieldset) {
+        var fieldsetData = {};
+        $(fieldset).find("input:not([type='submit'])")
+            .each(function() {
+                var val = this.value;
+
+                if (val !== "") {
+                    fieldsetData[this.name] = val;
+                }
+            });
+
+        return fieldsetData;
+    };
+
     // gathers form input values and inserts JSON of values into textarea
     var generateJSON = function(event) {
         event.preventDefault();
         var submittedInfo = {"slices": []},
             inputs,
-            fieldset = {},
-            fieldsetName,
+            fieldsetValues = {},
             output,
-            fieldsets = $('fieldset');
+            timestamp,
+            globalSettings = $('fieldset[data-visualization="global"]'),
+            fieldsets = $('fieldset[data-visualization="data"]');
 
-        // build objects of the fieldsets that have inputs with values
+        // assemble visualization data
         fieldsets.each(function() {
-            fieldset = {}; //reset
-            fieldsetName = $(this).attr('name');
+            fieldsetValues = parseInputs(this);
             
-            $(this).find("input:not([type='submit'])")
-                .each(function() {
-                    var val = this.value;
-
-                    if (val !== "") {
-                        fieldset[this.name] = val;
-                    }
-                });
-
             // if any of the inputs in this fieldset have values,
             // we want to preserve them
-            if ($.isEmptyObject(fieldset) === false) {
-                if (fieldsetName.substr(0, 5) === 'slice') {
-                    submittedInfo.slices.push(fieldset);
-                }
-                else {
-                    submittedInfo[fieldsetName] = fieldset;
-                }
+            // to play nice with D3, want to group all vis data into
+            // one array
+            if ($.isEmptyObject(fieldsetValues) === false) {
+                submittedInfo.slices.push(fieldsetValues);
             }
         });
 
+        // insert global options into object
+        if (globalSettings) {
+            submittedInfo['settings'] = parseInputs(globalSettings);
+        } 
+
+        timestamp = submittedInfo.settings.timestamp;
+
         // stringify and stick in the textarea
-        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization"></svg>\n';
+        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
         output += "<script>var CFPBDATA = '";
         output += [JSON.stringify(submittedInfo)];
         output += "';</script>";
