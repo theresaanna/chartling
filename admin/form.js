@@ -41,7 +41,7 @@ $(document).ready(function() {
     // gathers form input values and inserts JSON of values into textarea
     var generateJSON = function(event) {
         event.preventDefault();
-        var submittedInfo = {"slices": []},
+        var submittedInfo = {"sections": []},
             inputs,
             fieldsetValues = {},
             output,

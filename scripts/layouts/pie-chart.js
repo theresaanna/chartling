@@ -47,7 +47,7 @@ define(["./settings"], function(layoutSettings) {
 
             var chart = d3.select(".cfpb-data-visualization-" + chartData.settings.timestamp)
                 .append("svg:svg")
-                .data([chartData.slices])
+                .data([chartData.sections])
                     .attr("class", "pie")
                     .append("svg:g")
                     .attr("transform", "translate(450, 350)");
@@ -111,7 +111,7 @@ define(["./settings"], function(layoutSettings) {
               .attr("text-anchor", this.calculateTextAnchor)
               .attr("class", 'label percent')
               .attr("fill", this.getColor)
-              .text(function(d, i) { return chartData.slices[i].percent + "%"; });
+              .text(function(d, i) { return chartData.sections[i].percent + "%"; });
 
             //issue text
             arcs.append("svg:text")
@@ -121,7 +121,7 @@ define(["./settings"], function(layoutSettings) {
                   var coords = pieConstructor.getLabelPositioning(d, arc);
                   return "translate(" + (coords[0] * 264) + "," + (coords[1] * 257) + ")";
                 })
-                .text(function(d, i) { return chartData.slices[i].segmentName; });
+                .text(function(d, i) { return chartData.sections[i].segmentName; });
         }
     };
 });
