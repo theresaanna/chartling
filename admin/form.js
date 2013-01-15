@@ -58,7 +58,7 @@ $(document).ready(function() {
             // to play nice with D3, want to group all vis data into
             // one array
             if ($.isEmptyObject(fieldsetValues) === false) {
-                submittedInfo.slices.push(fieldsetValues);
+                submittedInfo.sections.push(fieldsetValues);
             }
         });
 
@@ -70,10 +70,11 @@ $(document).ready(function() {
         timestamp = submittedInfo.settings.timestamp;
 
         // stringify and stick in the textarea
+        // so ugly. can we template this?
         output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
-        output += "<script>var CFPBDATA = '";
+        output += "<script>$(document).ready(function(){CFPBDATA.push('";
         output += [JSON.stringify(submittedInfo)];
-        output += "';</script>";
+        output += "');});</script>";
         $('#json-output').val(output);
     };
     
