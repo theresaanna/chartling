@@ -6,7 +6,7 @@ $(document).ready(function() {
          * kicks off visualization rendering if there's a JSON object
          * in the DOM. we also don't load the D3 library unless its in use on this page.
          */
-        require(["libs/d3/d3.v3.min", "cfpb-data-layouts"], function(D3, DataVis) {
+        require(["cfpb-data-layouts"], function(DataVis) {
             var cfpbData,
                 i = CFPBDATA.length;
             while (i--) {
