@@ -71,10 +71,12 @@ $(document).ready(function() {
 
         // stringify and stick in the textarea
         // so ugly. can we template this?
-        output = '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
+        output = '<div class="data-vis">\n';
+        output += '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
+        output += '<div class="left cfpb-data-visualization-' + timestamp + '-index"></div>\n';
         output += "<script>$(document).ready(function(){CFPBDATA.push('";
         output += [JSON.stringify(submittedInfo)];
-        output += "');});</script>";
+        output += "');});</script>\n</div>";
         $('#json-output').val(output);
     };
     
