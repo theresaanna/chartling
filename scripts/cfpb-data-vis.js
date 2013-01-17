@@ -4,7 +4,6 @@ $(document).ready(function() {
     if (typeof CFPBDATA !== "undefined" && CFPBDATA.length > 0) {
         /*
          * kicks off visualization rendering if there's a JSON object
-         * in the DOM. we also don't load the D3 library unless its in use on this page.
          */
         require(["cfpb-data-layouts"], function(DataVis) {
             var cfpbData,

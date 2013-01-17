@@ -1,14 +1,23 @@
 <html>
 <head>
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="admin/libs/ICanHaz.min.js"></script>
 <script data-main="scripts/cfpb-data-vis" src="scripts/require.js"></script>
 <script>
     var CFPBDATA = [];
 </script>
+<link href="admin/styles.css" rel="stylesheet"></link>
 </head>
 <body>
 <!-- paste chart output here -->
-<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358270024268"></svg>
+<div class="data-vis">
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358270024268 left"></svg>
+<div class="left cfpb-data-visualization-1358270024268-index"></div>
 <script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"fsdfsd","percent":"34"},{"segmentName":"sdfsdf","percent":"77"}],"settings":{"chartTitle":"sdfsdf","timestamp":"1358270024268"}}');});</script>
+</div>
+
+<script id="pieChartIndex" type="text/html">
+    <li tabindex="0" id="slice-{{segmentName}}" data-segment="{{segmentName}}">{{segmentName}}</li>
+</script>
 </body>
 </html>
