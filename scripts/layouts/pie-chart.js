@@ -11,18 +11,21 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
         this.chartHover = function(d, d3Obj) {
             var slice = d3.select(d3Obj),
                 path = slice.select("path"),
+                enlargedArc = d3.svg.arc().outerRadius(220),
                 defaultFill = path.attr("fill");
             path.attr("default-fill", defaultFill)
-                .attr("fill", layoutSettings.activeColor);
-
+                .attr("fill", layoutSettings.activeColor)
+                .attr("d", enlargedArc);
             $('#slice-' + d.data.segmentName).addClass('active');
         },
 
         this.chartHoverOff = function(d, d3Obj) {
             var slice = d3.select(d3Obj),
                 path = slice.select("path"),
+                defaultArc = d3.svg.arc().outerRadius(200),
                 defaultFill = path.attr("default-fill");
-            path.attr("fill", defaultFill);
+            path.attr("fill", defaultFill)
+                .attr("d", defaultArc);
 
             $('#slice-' + d.data.segmentName).removeClass('active');
         },
