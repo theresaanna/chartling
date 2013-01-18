@@ -11,13 +11,20 @@
 <body>
 <!-- paste chart output here -->
 <div class="data-vis">
-<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358543633284"></svg>
-<div class="left cfpb-data-visualization-1358543633284-index"><ul class="index"></ul></div>
-<script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"Pizza slices","percent":"34","id":"1"},{"segmentName":"Pie slices","percent":"65","id":"2"},{"segmentName":"Cake slices","percent":"32","id":"3"}],"settings":{"chartTitle":"Chartling","timestamp":"1358543633284"}}');});</script>
+<div class="cfpb-data-visualization-1358550978215-tooltip"></div>
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358550978215"></svg>
+<div class="left cfpb-data-visualization-1358550978215-index"><ul class="index"></ul></div>
+<script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"Pie slices","percent":"75","units":"39,243","id":"1"},{"segmentName":"Pizza slices","percent":"13","units":"5924","id":"2"},{"segmentName":"Cake slices","percent":"24","units":"12,245","id":"3"}],"settings":{"chartTitle":"Chart","timestamp":"1358550978215","total":"103,431","totalLabel":"Total Slices"}}');});</script>
+<div class="cfpb-data-visualization-1358550978215-total right"></div>
 </div>
 
 <script id="pieChartIndex" type="text/html">
     <li tabindex="0" id="slice-{{id}}" data-segment="{{segmentName}}"><span style="width: 20px; height: 7px; background-color: {{color}}; display: inline-block; margin-right: 5px;"></span>{{segmentName}}</li>
 </script>
+
+<script id="pieChartTotal" type="text/html">
+    <strong>{{totalLabel}}</strong> <span>{{total}}</span>
+</script>
+
 </body>
 </html>

@@ -82,7 +82,8 @@ $(document).ready(function() {
         output += '<div class="left cfpb-data-visualization-' + timestamp + '-index"><ul class="index"></ul></div>\n';
         output += "<script>$(document).ready(function(){CFPBDATA.push('";
         output += [JSON.stringify(submittedInfo)];
-        output += "');});</script>\n</div>";
+        output += "');});</script>\n";
+        output += '<div class="cfpb-data-visualization-' + timestamp + ' right"></div></div>';
         $('#json-output').val(output);
     };
     

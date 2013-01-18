@@ -14,25 +14,25 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
         this.chartHover = function(d, d3Obj) {
             var slice = d3.select(d3Obj),
                 path = slice.select("path"),
-                enlargedArc = d3.svg.arc().outerRadius(220),
-                defaultFill = path.attr("fill");
-            path.attr("default-fill", defaultFill)
-                .attr("fill", layoutSettings.activeColor)
-                .attr("d", enlargedArc);
+                enlargedArc = d3.svg.arc().outerRadius(220);
+            path.attr("d", enlargedArc);
             $('#slice-' + d.data.id).addClass('active');
         },
 
         this.chartHoverOff = function(d, d3Obj) {
             var slice = d3.select(d3Obj),
                 path = slice.select("path"),
-                defaultArc = d3.svg.arc().outerRadius(200),
-                defaultFill = path.attr("default-fill");
-            path.attr("fill", defaultFill)
-                .attr("d", defaultArc);
+                defaultArc = d3.svg.arc().outerRadius(200);
+            path.attr("d", defaultArc);
 
             $('#slice-' + d.data.id).removeClass('active');
         },
 
+        this.toggleTooltip = function(sliceData) {
+            
+        },
+
+        // generate the pie slices themselves using d3
         this.d3Render = function(chartData, svgClass) {
             var chartModule = this;
             var chart = d3.select(svgClass)
@@ -42,9 +42,12 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                         .append("svg:g")
                         .attr("transform", "translate(450, 350)");
 
+                // determines the diameter of slices
                 var arc = d3.svg.arc()
                     .outerRadius(200);
 
+                // a nice d3 method that does the math of generating
+                // relatively sized slices for us
                 var pie = d3.layout.pie()
                   .value(function(d) {
                     return d.percent;
@@ -78,6 +81,12 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                         chartModule[isMouseout ? 'chartHoverOff' : 'chartHover'](d, this);                            
                     }
                 });
+        },
+
+        this.renderTotal = function(chartData, svgClass) {
+            var totalContainer = $(svgClass + '-total'),
+                template = ich.pieChartTotal(chartData.settings);
+            totalContainer.html(template);
         },
 
         this.renderIndex = function(chartData, svgClass) {
@@ -115,8 +124,8 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                 // if svg is supported, use D3
                 require(["libs/d3/d3.v3.min"], function(D3) {
                     layoutModule.renderIndex(chartData, svgClass);
-
                     layoutModule.d3Render(chartData, svgClass);              
+                    layoutModule.renderTotal(chartData, svgClass);
                 });
             }
             else {
