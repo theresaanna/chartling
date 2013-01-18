@@ -37,3 +37,7 @@
     color: #50B948;
     font-weight: bold;
 }
+
+ul.index {
+    list-style-type: none;
+}

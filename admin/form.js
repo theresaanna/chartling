@@ -73,7 +73,7 @@ $(document).ready(function() {
         // so ugly. can we template this?
         output = '<div class="data-vis">\n';
         output += '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
-        output += '<div class="left cfpb-data-visualization-' + timestamp + '-index"></div>\n';
+        output += '<div class="left cfpb-data-visualization-' + timestamp + '-index"><ul class="index"></ul></div>\n';
         output += "<script>$(document).ready(function(){CFPBDATA.push('";
         output += [JSON.stringify(submittedInfo)];
         output += "');});</script>\n</div>";

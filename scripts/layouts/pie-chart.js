@@ -80,13 +80,14 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
         this.renderIndex = function(chartData, svgClass) {
             var chartModule = this,
                 indexClass = svgClass + "-index",
-                indexContainer = $(indexClass),
+                indexContainer = $(indexClass + " .index"),
                 numSlices = chartData.sections.length - 1,
                 template;
 
             for (var i = 0; i <= numSlices; i++) {
-               template = ich.pieChartIndex(chartData.sections[i]); 
-               indexContainer.append(template);
+                chartData.sections[i].color = chartModule.getColor({}, i);  
+                template = ich.pieChartIndex(chartData.sections[i]); 
+                indexContainer.append(template);
             } 
 
             indexContainer.on('mouseover', function(event) {
