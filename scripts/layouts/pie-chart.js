@@ -16,7 +16,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
             path.attr("default-fill", defaultFill)
                 .attr("fill", layoutSettings.activeColor)
                 .attr("d", enlargedArc);
-            $('#slice-' + d.data.segmentName).addClass('active');
+            $('#slice-' + d.data.id).addClass('active');
         },
 
         this.chartHoverOff = function(d, d3Obj) {
@@ -27,7 +27,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
             path.attr("fill", defaultFill)
                 .attr("d", defaultArc);
 
-            $('#slice-' + d.data.segmentName).removeClass('active');
+            $('#slice-' + d.data.id).removeClass('active');
         },
 
         this.d3Render = function(chartData, svgClass) {

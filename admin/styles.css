@@ -41,3 +41,8 @@
 ul.index {
     list-style-type: none;
 }
+
+ul.index li,
+g.slice {
+    cursor: pointer;
+}

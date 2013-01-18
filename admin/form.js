@@ -31,6 +31,10 @@ $(document).ready(function() {
                 var val = this.value;
 
                 if (val !== "") {
+                    if (this.name === 'id' && fieldsetData.hasOwnProperty('segmentName') === false) {
+                        return;
+                    }
+
                     fieldsetData[this.name] = val;
                 }
             });

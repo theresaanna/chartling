@@ -11,12 +11,13 @@
 <body>
 <!-- paste chart output here -->
 <div class="data-vis">
-<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358460626436"></svg>
-<div class="left cfpb-data-visualization-1358460626436-index"><ul class="index"></ul></div>
-<script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"things","percent":"45"},{"segmentName":"more things","percent":"38"},{"segmentName":"stuff","percent":"6"}],"settings":{"chartTitle":"a chart","timestamp":"1358460626436"}}');});</script>
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358543633284"></svg>
+<div class="left cfpb-data-visualization-1358543633284-index"><ul class="index"></ul></div>
+<script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"Pizza slices","percent":"34","id":"1"},{"segmentName":"Pie slices","percent":"65","id":"2"},{"segmentName":"Cake slices","percent":"32","id":"3"}],"settings":{"chartTitle":"Chartling","timestamp":"1358543633284"}}');});</script>
 </div>
+
 <script id="pieChartIndex" type="text/html">
-    <li tabindex="0" id="slice-{{segmentName}}" data-segment="{{segmentName}}"><span style="width: 20px; height: 7px; background-color: {{color}}; display: inline-block; margin-right: 5px;"></span>{{segmentName}}</li>
+    <li tabindex="0" id="slice-{{id}}" data-segment="{{segmentName}}"><span style="width: 20px; height: 7px; background-color: {{color}}; display: inline-block; margin-right: 5px;"></span>{{segmentName}}</li>
 </script>
 </body>
 </html>
