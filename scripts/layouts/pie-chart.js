@@ -4,10 +4,13 @@
  */
 define(["./settings", "./helpers"], function(layoutSettings, helpers) {
     return function() {
+        // return appropriate color value from gradient array
         this.getColor = function(d, i) {
           return layoutSettings.colorGradient[i];
         },
 
+        // event handlers for active states
+        // these should be a little neater
         this.chartHover = function(d, d3Obj) {
             var slice = d3.select(d3Obj),
                 path = slice.select("path"),
@@ -82,6 +85,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                 indexClass = svgClass + "-index",
                 indexContainer = $(indexClass + " .index"),
                 numSlices = chartData.sections.length - 1,
+                indexItems,
                 template;
 
             for (var i = 0; i <= numSlices; i++) {
@@ -90,11 +94,13 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                 indexContainer.append(template);
             } 
 
-            indexContainer.on('mouseover', function(event) {
+            indexItems = indexContainer.find('li');
+
+            indexItems.on('mouseover focus', function(event) {
                 chartModule.indexEventHandler(event, false);
             });
 
-            indexContainer.on('mouseout', function(event) {
+            indexItems.on('mouseout blur', function(event) {
                 chartModule.indexEventHandler(event, true);
             });
 

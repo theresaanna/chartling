@@ -24,6 +24,7 @@ $(document).ready(function() {
         $("#visualization-form").html(optionForm);
     };
 
+    // accepts fieldset node, returns object of form values
     var parseInputs = function(fieldset) {
         var fieldsetData = {};
         $(fieldset).find("input:not([type='submit'])")
@@ -31,6 +32,7 @@ $(document).ready(function() {
                 var val = this.value;
 
                 if (val !== "") {
+                    //  if the only input with a value is the id, we don't actually want this section
                     if (this.name === 'id' && fieldsetData.hasOwnProperty('segmentName') === false) {
                         return;
                     }
