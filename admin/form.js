@@ -21,7 +21,7 @@ $(document).ready(function() {
         }
 
         optionForm = ich[templateName](form);
-        $("#visualization-form").append(optionForm);
+        $("#visualization-form").html(optionForm);
     };
 
     var parseInputs = function(fieldset) {
