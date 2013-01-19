@@ -17,6 +17,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                 enlargedArc = d3.svg.arc().outerRadius(220);
             path.attr("d", enlargedArc);
             $('#slice-' + d.data.id).addClass('active');
+            this.populateTooltip(d);
         },
 
         this.chartHoverOff = function(d, d3Obj) {
@@ -26,10 +27,17 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
             path.attr("d", defaultArc);
 
             $('#slice-' + d.data.id).removeClass('active');
+            this.toggleTooltip();
         },
 
-        this.toggleTooltip = function(sliceData) {
-            
+        this.toggleTooltip = function() {
+            this.tooltipContainer.hide();
+        };
+
+        this.populateTooltip = function(sliceData) {
+            this.tooltipContainer.show();
+            var template = ich.pieChartTooltip(sliceData.data);
+            this.tooltipContainer.html(template);
         },
 
         // generate the pie slices themselves using d3
@@ -126,6 +134,11 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                     layoutModule.renderIndex(chartData, svgClass);
                     layoutModule.d3Render(chartData, svgClass);              
                     layoutModule.renderTotal(chartData, svgClass);
+                    
+                    // set tooltip container as a property so that we can access
+                    // the appropriate one when we don't have the 
+                    // settings object in context
+                    layoutModule.tooltipContainer = $(svgClass + "-tooltip");
                 });
             }
             else {
