@@ -2,7 +2,7 @@
 <head>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="admin/libs/ICanHaz.min.js"></script>
-<script data-main="scripts/cfpb-data-vis" src="scripts/require.js"></script>
+<script data-main="scripts/chartling" src="scripts/require.js"></script>
 <script>
     var CFPBDATA = [];
 </script>
@@ -11,11 +11,11 @@
 <body>
 <!-- paste chart output here -->
 <div class="data-vis">
-<div class="cfpb-data-visualization-1358550978215-tooltip tooltip"></div>
+<div class="tooltip"></div>
 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358550978215"></svg>
-<div class="left cfpb-data-visualization-1358550978215-index"><ul class="index"></ul></div>
-<script>$(document).ready(function(){CFPBDATA.push('{"sections":[{"segmentName":"Pie slices","percent":"75","units":"39,243","id":"1"},{"segmentName":"Pizza slices","percent":"13","units":"5924","id":"2"},{"segmentName":"Cake slices","percent":"24","units":"12,245","id":"3"}],"settings":{"chartTitle":"Chart","timestamp":"1358550978215","total":"103,431","totalLabel":"Total Slices"}}');});</script>
-<div class="cfpb-data-visualization-1358550978215-total right"></div>
+<div class="left"><ul class="index"></ul></div>
+<script>$(document).ready(function(){ChartlingData.push('{"sections":[{"segmentName":"Pie slices","percent":"75","units":"39,243","id":"1"},{"segmentName":"Pizza slices","percent":"13","units":"5924","id":"2"},{"segmentName":"Cake slices","percent":"24","units":"12,245","id":"3"}],"settings":{"chartTitle":"Chart","timestamp":"1358550978215","total":"103,431","totalLabel":"Total Slices"}}');});</script>
+<div class="right"></div>
 </div>
 
 <script id="pieChartIndex" type="text/html">

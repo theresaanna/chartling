@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    CFPBData = {};
+    ChartlingData = {};
     // id, text
-    CFPBData.layoutTypes = {
+    ChartlingData.layoutTypes = {
         linkId: 'pieChart', 
         linkText: "Pie Chart"
     };
@@ -78,17 +78,17 @@ $(document).ready(function() {
         // stringify and stick in the textarea
         // so ugly. can we template this?
         output = '<div class="data-vis">\n';
-        output += '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-' + timestamp + '"></svg>\n';
-        output += '<div class="left cfpb-data-visualization-' + timestamp + '-index"><ul class="index"></ul></div>\n';
-        output += "<script>$(document).ready(function(){CFPBDATA.push('";
+        output += '<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="chartling-' + timestamp + '"></svg>\n';
+        output += '<div class="left chartling-' + timestamp + '-index"><ul class="index"></ul></div>\n';
+        output += "<script>$(document).ready(function(){ChartlingData.push('";
         output += [JSON.stringify(submittedInfo)];
         output += "');});</script>\n";
-        output += '<div class="cfpb-data-visualization-' + timestamp + ' right"></div></div>';
+        output += '<div class="chartling-' + timestamp + ' right"></div></div>';
         $('#json-output').val(output);
     };
     
     // render visualization options
-    var layoutList = ich.linkList(CFPBData.layoutTypes);
+    var layoutList = ich.linkList(ChartlingData.layoutTypes);
     $("#layout-types").append(layoutList);
 
     // event bindings
