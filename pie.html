@@ -4,7 +4,7 @@
 <script src="admin/libs/ICanHaz.min.js"></script>
 <script data-main="scripts/chartling" src="scripts/require.js"></script>
 <script>
-    var CFPBDATA = [];
+    var ChartlingData = [];
 </script>
 <link href="admin/styles.css" rel="stylesheet"></link>
 </head>
@@ -12,7 +12,7 @@
 <!-- paste chart output here -->
 <div class="data-vis">
 <div class="tooltip"></div>
-<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="cfpb-data-visualization-1358550978215"></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" class="chartling-layout-1358550978215"></svg>
 <div class="left"><ul class="index"></ul></div>
 <script>$(document).ready(function(){ChartlingData.push('{"sections":[{"segmentName":"Pie slices","percent":"75","units":"39,243","id":"1"},{"segmentName":"Pizza slices","percent":"13","units":"5924","id":"2"},{"segmentName":"Cake slices","percent":"24","units":"12,245","id":"3"}],"settings":{"chartTitle":"Chart","timestamp":"1358550978215","total":"103,431","totalLabel":"Total Slices"}}');});</script>
 <div class="right"></div>
@@ -27,7 +27,7 @@
 </script>
 
 <script id="pieChartTooltip" type="text/html">
-    <strong{{segmentName}}</strong> <span>({{percent}}%)</span>
+    <strong>{{segmentName}}</strong> <span>({{percent}}%)</span>
     <span>{{units}}</span>
     <div>
         {{tooltipText}}

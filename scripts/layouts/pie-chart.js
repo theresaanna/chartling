@@ -1,9 +1,40 @@
 /* 
  * layout module
- * only public method is 'render' which accepts parsed CFPBDATA JSON
  */
 define(["./settings", "./helpers"], function(layoutSettings, helpers) {
     return function() {
+        this.calculateTextAnchor = function(d) {
+          // calculate whether we are past the 6pm point on the pie
+          // so that we know where to anchor the text
+          // given that the label should "radiate" from the center
+          var pos = "start",
+              // bad var name, prob incorrect
+              arcLine = d.endAngle + d.startAngle;
+
+          // 180 degrees = pi radians
+          // result - arcLine/2 > 3.14 = slice on left side if pie
+          // otherwise its on the right
+          // except for the last slice, which should be positioned "start"
+          // the last slice will have an endAngle = Pi*2, except its a quadrillionth off
+          if (arcLine/2 > Math.PI && d.endAngle !== Math.PI*2 + 0.000000000000001) {
+              pos = "end";
+          }
+
+          return pos;
+        },
+
+        this.getLabelPositioning = function(d, arc) {
+          // c = x,y coord of what I assume is the center point of the arc
+          // can't find much on the concept of a centroid for arcs
+          var c = arc.centroid(d),
+              x = c[0],
+              y = c[1], 
+              // crazy pythagoras
+              hyp = Math.sqrt(x*x + y*y);
+              // x/hypotenuse * horiz label radius, y/hypotenuse * vert label radius
+          return [(x/hyp), (y/hyp)];
+        },
+
         // return appropriate color value from gradient array
         this.getColor = function(d, i) {
           return layoutSettings.colorGradient[i];
@@ -72,6 +103,21 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                     .attr("fill", this.getColor)
                     .attr("d", arc);
 
+                // percent text
+                arcs.append("svg:text")
+                  // transform and translate are attributes of svg <text>
+                  .attr("transform", function(d) {
+                    d.innerRadius = 0;
+                    var coords = chartModule.getLabelPositioning(d, arc);
+                    // x/hypotenuse * horiz label radius, y/hypotenuse * vert label radius
+                    return "translate(" + (coords[0] * 214) +  ',' +
+                       (coords[1]* 237) +  ")"; 
+                  })
+                  .attr("text-anchor", this.calculateTextAnchor)
+                  .attr("class", 'label percent')
+                  .attr("fill", this.getColor)
+                  .text(function(d, i) { return d.data.percent + "%"; });
+
                 arcs.on("mouseover", function(d) { chartModule.chartHover(d, this); })
                   .on("mouseout", function(d) { chartModule.chartHoverOff(d, this); });
         },
@@ -125,8 +171,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
 
         this.render = function(chartData) {
             var layoutModule = this,
-                svgClass = ".cfpb-data-visualization-" + chartData.settings.timestamp;
-
+                svgClass = ".chartling-layout-" + chartData.settings.timestamp;
 
             if (helpers.supportsSvg()) {
                 // if svg is supported, use D3
@@ -138,7 +183,7 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                     // set tooltip container as a property so that we can access
                     // the appropriate one when we don't have the 
                     // settings object in context
-                    layoutModule.tooltipContainer = $(svgClass + "-tooltip");
+                    layoutModule.tooltipContainer = $('.tooltip').append('<div class="' + svgClass + "-tooltip></div>");
                 });
             }
             else {

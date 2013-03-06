@@ -5,7 +5,7 @@ $(document).ready(function() {
         /*
          * kicks off visualization rendering if there's a JSON object
          */
-        require(["cfpb-data-layouts"], function(Chartling) {
+        require(["chartling-layouts"], function(Chartling) {
             var chartlingData,
                 i = ChartlingData.length;
             while (i--) {
