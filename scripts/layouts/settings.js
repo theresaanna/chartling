@@ -1,3 +1,4 @@
+"use strict";
 // definitions of attributes that should apply to all layouts
 define(function() {
     return {

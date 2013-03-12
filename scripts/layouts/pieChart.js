@@ -1,8 +1,11 @@
+"use strict";
 /* 
  * layout module
  */
 define(["./settings", "./helpers"], function(layoutSettings, helpers) {
-    return function() {
+    var pieChart;
+
+    return pieChart = function() {
         this.calculateTextAnchor = function(d) {
           // calculate whether we are past the 6pm point on the pie
           // so that we know where to anchor the text
@@ -122,10 +125,6 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                   .on("mouseout", function(d) { chartModule.chartHoverOff(d, this); });
         },
 
-        this.raphaelRender = function(chartData) {
-
-        },
-        
         this.indexEventHandler = function(event, isMouseout) {
             var chartModule = this,
                 segment = event.target.dataset.segment;
@@ -187,10 +186,6 @@ define(["./settings", "./helpers"], function(layoutSettings, helpers) {
                 });
             }
             else {
-                // if not, use Raphael
-                require(["libs/raphael-min"], function(raphael) {
-                    layoutModule.raphaelRender(chartData);
-                });
             }
         }
     };
