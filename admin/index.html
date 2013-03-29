@@ -2,7 +2,7 @@
 <head>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="libs/ICanHaz.min.js"></script>
-<script src="form.js"></script>
+<script data-main="js/admin" src="../scripts/require.js"></script>
 
 <link rel="stylesheet" href="styles.css"></link>
 </head>
@@ -14,6 +14,17 @@
     <form id="layout-types"></form>
 
     <form id="visualization-form"></form>
+
+    <form id="import-data">
+      <input type="text" id="import-url"></input>
+      <select id="import-type">
+        <option value="csv">CSV</option>
+        <option value="xml">XML</option>
+        <option value="API">API Query</option>
+        <option value="json">JSON</option>
+      </select>
+      <input type="submit"></input>
+    </form>
 </section>
 
 <section id="output">
